@@ -1,0 +1,226 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                    TISAP - Setup Instructions                             ║
+║              Cyber Security Awareness Platform                            ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+📋 PREREQUISITES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✓ Node.js 18+ installed
+✓ npm or yarn package manager
+✓ FastAPI backend running at http://localhost:8000 (optional - has mock data)
+
+🚀 INSTALLATION STEPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 1: Navigate to Project Directory
+--------------------------------------
+cd d:/inn/Innovative/TISAP
+
+STEP 2: Install Dependencies
+-----------------------------
+npm install
+
+This will install:
+  - Next.js 14
+  - React 18
+  - TypeScript
+  - Tailwind CSS
+  - Recharts (for charts)
+  - Lucide React (for icons)
+  - Other utilities
+
+STEP 3: Verify Environment Variables
+-------------------------------------
+Check that .env.local contains:
+NEXT_PUBLIC_API_URL=http://localhost:8000
+
+STEP 4: Start Development Server
+---------------------------------
+npm run dev
+
+The app will start at: http://localhost:3000
+
+🎯 FIRST TIME USAGE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Open browser: http://localhost:3000
+2. You'll see the login page
+3. Select a role:
+   
+   👤 ADMIN
+   ├─ View organization-wide metrics
+   ├─ Filter by department
+   ├─ Assign remedial training
+   └─ Export reports
+   
+   👥 MANAGER
+   ├─ View team-specific data
+   ├─ Download CSV/PDF reports
+   └─ Monitor team members
+   
+   👨‍💼 EMPLOYEE
+   ├─ View personal security score
+   ├─ See event timeline
+   ├─ Read security tips
+   └─ Track score history
+
+4. Click "Continue" to access your dashboard
+
+📡 CONNECTING TO FASTAPI BACKEND
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Required Endpoints:
+-------------------
+GET  /api/data              → Dashboard metrics
+GET  /api/users             → All users (admin only)
+GET  /api/users/:id         → Individual user data
+POST /api/events            → Create security event
+POST /api/assign-remedial   → Assign training
+
+CORS Configuration (FastAPI):
+------------------------------
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+Note: If FastAPI is not running, the app will use mock data automatically!
+
+🏗️ PRODUCTION BUILD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Build for production:
+npm run build
+
+Start production server:
+npm start
+
+🛠️ AVAILABLE COMMANDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+npm run dev     → Start development server (hot reload)
+npm run build   → Create production build
+npm start       → Start production server
+npm run lint    → Run ESLint checks
+
+🔍 TROUBLESHOOTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Problem: Port 3000 already in use
+Solution: Next.js will prompt to use another port (e.g., 3001)
+
+Problem: API connection errors
+Solution: 
+  - Check FastAPI is running on port 8000
+  - Verify CORS configuration
+  - App will fall back to mock data if API unavailable
+
+Problem: TypeScript errors in IDE
+Solution: These will resolve after running "npm install"
+
+Problem: Build errors
+Solution: 
+  rm -rf node_modules .next
+  npm install
+  npm run dev
+
+📁 PROJECT STRUCTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TISAP/
+├── app/              → Pages (Next.js App Router)
+│   ├── admin/        → Admin dashboard
+│   ├── manager/      → Manager dashboard
+│   ├── employee/     → Employee dashboard
+│   ├── login/        → Login page
+│   └── dashboard/    → Smart router
+├── components/       → Reusable UI components
+├── context/          → Authentication context
+├── lib/              → API client & utilities
+└── Documentation files
+
+📚 DOCUMENTATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+README.md            → Full documentation
+QUICKSTART.md        → Quick start guide
+PROJECT_SUMMARY.md   → Project overview
+SETUP_INSTRUCTIONS.txt → This file
+
+✨ FEATURES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ Role-based dashboards (Admin, Manager, Employee)
+✓ Real-time data updates (5-second polling)
+✓ Interactive charts (Bar, Pie, Line)
+✓ Event timeline with risk indicators
+✓ Remedial training assignment
+✓ Department filtering
+✓ CSV/PDF export
+✓ Security tips and guidance
+✓ Responsive design
+✓ Professional styling
+✓ Mock data fallback
+✓ TypeScript type safety
+
+🎨 DESIGN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Color Scheme:
+  Primary:   Steel Blue (#0284c7)
+  Secondary: Teal (#0d9488)
+  Success:   Green (#10b981)
+  Warning:   Yellow (#f59e0b)
+  Danger:    Red (#ef4444)
+
+Typography: Inter (Google Fonts)
+Layout: Sidebar + Main content area
+Style: Professional corporate look
+
+🔐 AUTHENTICATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Current: Fake login (role selector)
+Storage: localStorage
+Production: Implement NextAuth.js or similar
+
+📊 DATA FLOW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. User logs in → Role stored
+2. Dashboard loads → API call
+3. Data displayed → Charts render
+4. Poll every 5s → Live updates
+5. User actions → API calls
+6. State updates → UI refreshes
+
+🎯 NEXT STEPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Run "npm install"
+2. Start dev server with "npm run dev"
+3. Open http://localhost:3000
+4. Select a role and explore
+5. Connect to your FastAPI backend
+6. Customize as needed
+
+📞 SUPPORT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For questions or issues:
+- Check README.md for detailed documentation
+- Review QUICKSTART.md for common scenarios
+- See PROJECT_SUMMARY.md for architecture overview
+
+═══════════════════════════════════════════════════════════════════════════
+
+                    🚀 Ready to launch TISAP! 🚀
+                    
+                    Run: npm install && npm run dev
+
+═══════════════════════════════════════════════════════════════════════════

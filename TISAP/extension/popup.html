@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TISAP Security Simulator</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">🛡️</div>
+      <div class="title">
+        <h1>TISAP Security Simulator</h1>
+        <p>Send simulated browser events to FastAPI</p>
+      </div>
+    </header>
+
+    <section class="field">
+      <label for="userId">User ID</label>
+      <input id="userId" type="text" placeholder="e.g., employee-123" />
+    </section>
+
+    <section class="buttons">
+      <button id="btnClick" class="btn primary">Simulate Click</button>
+      <button id="btnReport" class="btn outline">Report Simulation</button>
+      <button id="btnIgnore" class="btn ghost">Simulate Ignore</button>
+    </section>
+
+    <section id="status" class="status" aria-live="polite"></section>
+
+    <footer class="footer">
+      <small>API: http://localhost:8000/api/events</small>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
